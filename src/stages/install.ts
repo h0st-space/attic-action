@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
-import { which } from ('@actions/io');
+import { which } from "@actions/io";
 import { writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
