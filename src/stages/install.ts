@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
-
+import { which } from ('@actions/io');
 import { writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -26,7 +26,11 @@ export const install = async () => {
 
 		await writeFile(installScriptPath, installScript);
 		core.info("Running install script");
-		await exec("bash", [installScriptPath]);
+		if (await which("attic") === '') {
+			await exec("bash", [installScriptPath]);}
+		else {
+			core.info("already installed");
+		}
 	} catch (e) {
 		core.setFailed(`Action failed with error: ${e}`);
 	}
